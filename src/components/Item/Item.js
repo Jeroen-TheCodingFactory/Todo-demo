@@ -1,29 +1,27 @@
 import React from "react";
 import "./Item.css";
 
-class Item extends React.Component{
-    constructor(props){
+class Item extends React.Component {
+    constructor(props) {
         super(props);
-        this.className = "";
-        this.state = {done: this.props.done}
+        this.state = { done: false }
+    }
+    onItemClick = () => {
+        this.setState({ done: true },
+            () => setTimeout(() => this.props.updateState(this.props.id), 300));
     }
 
-    onItemClick = () =>{
-        this.setState({done: !this.state.done});
-    }
-
-    render(){
-        if(this.state.done){
-            this.className = "todo__item todo__item--done"
+    render() {
+        let classNames = "todo__item";
+        if(this.state.done === true){
+            classNames += " todo__item--done";
         }
-        else{
-            this.className = "todo__item"
-        }
-        return(
-           <li onClick={this.onItemClick} class={this.className}>{this.props.name} </li>
+        return (
+            <li onClick={this.onItemClick} class={classNames}>{this.props.name}</li>
         )
     }
-       
+
+
 }
 
 export default Item;

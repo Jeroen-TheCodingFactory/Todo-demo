@@ -5,8 +5,7 @@ const App = () =>{
     return (
         <>
                 <Todo  />
-                <Todo  />
-                <Todo  />
+             
 
         </>
     )
