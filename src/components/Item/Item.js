@@ -1,29 +1,29 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import "./Item.css";
 
-class Item extends React.Component{
-    constructor(props){
-        super(props);
-        this.className = "";
-        this.state = {done: this.props.done}
-    }
-
-    onItemClick = () =>{
-        this.setState({done: !this.state.done});
-    }
-
-    render(){
-        if(this.state.done){
-            this.className = "todo__item todo__item--done"
+const Item = (props) => {
+    const [done, setDone] = useState(false);
+    const [className, setClassName] = useState("todo__item");
+    
+    useEffect(() => {
+        if(done === true){
+            setClassName("todo__item todo__item--done");
+            setTimeout( () => {
+                setClassName("todo__item todo__item--done todo__item--gone");
+            },800);
         }
         else{
-            this.className = "todo__item"
+            setClassName("todo__item");
         }
-        return(
-           <li onClick={this.onItemClick} class={this.className}>{this.props.name} </li>
-        )
+    }, [done]);
+
+    const onItemClick = () => {
+        setDone(!done);
     }
-       
+
+    return (
+        <li onClick={onItemClick} className={className}>{props.name} </li>
+    )
 }
 
 export default Item;
