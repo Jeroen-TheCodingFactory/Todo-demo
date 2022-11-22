@@ -40,3 +40,7 @@
 .todo__item--done{
     text-decoration: line-through;
 }
+
+.todo__item--gone{
+    display:none;
+}
